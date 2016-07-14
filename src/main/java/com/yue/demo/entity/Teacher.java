@@ -1,4 +1,6 @@
-package com.yue.base.entity;
+package com.yue.demo.entity;
+
+import com.yue.common.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -11,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="teacher")
-public class Teacher extends IdEntity{
+public class Teacher extends IdEntity {
 
     private String name;
     private int age;

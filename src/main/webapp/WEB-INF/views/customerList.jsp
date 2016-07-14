@@ -1,17 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!--必须带上字符否则会出错-->
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
-<form id="pagerForm" method="post" action="/user/page">
-  <%--<input type="hidden" name="status" value="${param.status}">--%>
-  <%--<input type="hidden" name="keywords" value="${baseConditionVO.keywords}" />--%>
-  <input type="hidden" name="pageNum" value="${baseConditionVO.pageNum}" />
-  <input type="hidden" name="pageSize" value="${baseConditionVO.pageSize}" />
-  <input type="hidden" name="orderField" value="${baseConditionVO.orderField}" />
-</form>
+<%@page contentType="text/html;charset=UTF-8" language="java" %> <!--必须带上字符否则会出错-->
+<%@ include file="common/include.inc.jsp" %>
 
 
 <div class="pageHeader">
+  <pageHeader>
   <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/user/page" method="get">
     <div class="searchBar">
       <table class="searchContent">
@@ -40,8 +32,13 @@
       </div>
     </div>
   </form>
+  </pageHeader>
 </div>
+
+
+
 <div class="pageContent">
+  <pageContent>
   <div class="panelBar">
     <ul class="toolBar">
       <%--<shiro:hasRole name="admin">--%>
@@ -76,17 +73,5 @@
     </c:if>
     </tbody>
   </table>
-  <div class="panelBar">
-    <div class="pages">
-      <span>显示</span>
-      <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-      </select>
-      <span>条，共${baseConditionVO.totalCount}条</span>
-    </div>
-    <div class="pagination" targetType="navTab" totalCount="${baseConditionVO.totalCount}" numPerPage="${baseConditionVO.pageSize}" pageNumShown="10" currentPage="${baseConditionVO.pageNum}"></div>
-  </div>
+  </pageContent>
 </div>

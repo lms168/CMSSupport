@@ -1,4 +1,4 @@
-package com.yue.base.repository;
+package com.yue.demo.repository;
 
 /**
  * Created by lms on 16-6-26.

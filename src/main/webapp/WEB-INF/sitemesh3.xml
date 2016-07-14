@@ -31,9 +31,9 @@
     <!--</content-processor>-->
     <!--...-->
     <content-processor>
-        <tag-rule-bundle class="com.yue.tag.MyTagRuleBundle" />
+        <tag-rule-bundle class="com.yue.tag.PageTagRuleBundle" />
     </content-processor>
 
-    <mapping path="/mvc/*" decorator="/WEB-INF/jsp/decorator/decorator.jsp"/>
+    <mapping path="/**/page*" decorator="/WEB-INF/views/decorator/decorator.jsp"/>
     <!--<mapping path="*/redirect/*.html" decorator="/WEB-INF/common/decorator.jsp"></mapping>-->
 </sitemesh>

@@ -1,4 +1,6 @@
-package com.yue.base.entity;
+package com.yue.demo.entity;
+
+import com.yue.common.IdEntity;
 
 import javax.persistence.*;
 

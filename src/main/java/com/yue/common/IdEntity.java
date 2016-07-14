@@ -1,4 +1,4 @@
-package com.yue.base.entity;
+package com.yue.common;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

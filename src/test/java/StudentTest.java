@@ -1,6 +1,6 @@
-import com.yue.base.entity.Student;
-import com.yue.base.service.StudentService;
-import com.yue.base.service.TeacherService;
+import com.yue.demo.entity.Student;
+import com.yue.demo.service.StudentService;
+import com.yue.demo.service.TeacherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

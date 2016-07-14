@@ -1,7 +1,5 @@
-package com.yue.base.controller;
+package com.yue.common;
 
-import com.yue.base.entity.BaseAjaxBean;
-import com.yue.base.entity.BaseConditionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,36 +12,25 @@ public class BaseController {
     @Autowired
     protected HttpServletRequest request;
 
-    public BaseConditionVO getBaseConditionVO() {
-        return baseConditionVO;
+    public BasePageVO getBasePageVO() {
+        return basePageVO;
     }
 
-    protected BaseConditionVO baseConditionVO;
+    protected BasePageVO basePageVO;
 
     protected ModelAndView mv = new ModelAndView();
 
-    protected BaseAjaxBean baseAjaxBean = new BaseAjaxBean();
+
 
     /**
      * 获取分析信息组装bean
      * @return
      */
-    protected BaseConditionVO getBaseConditionVo(){
-        System.out.println("注入get");
-        return (BaseConditionVO)request.getAttribute("baseConditionVO");
+    protected BasePageVO getBaseConditionVo(){
+        return (BasePageVO)request.getAttribute("basePageVO");
     }
 
 
-
-
-//    protected BaseAjaxBean getBaseAjaxBean() {
-//        baseAjaxBean = (BaseAjaxBean) request.getAttribute("baseAjaxBean");
-//        if (baseAjaxBean==null){
-//            baseAjaxBean = new BaseAjaxBean();
-//        }
-//        return baseAjaxBean;
-//
-//    }
 
 
     protected ModelAndView ajaxDone(int statusCode, String message, String forwardUrl) {

@@ -11,12 +11,12 @@ import org.sitemesh.tagprocessor.State;
  * 自定义标签
  * Created by lms on 16-6-14.
  */
-public class MyTagRuleBundle implements TagRuleBundle{
+public class PageTagRuleBundle implements TagRuleBundle{
 
     public void install(State defaultState, ContentProperty contentProperty,
                         SiteMeshContext siteMeshContext) {
-        defaultState.addRule("myfooter",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("myfooter"),false));
-        defaultState.addRule("myheader",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("myheader"),false));
+        defaultState.addRule("pageHeader",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("pageHeader"),false));
+        defaultState.addRule("pageContent",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("pageContent"),false));
 
     }
 

@@ -1,6 +1,6 @@
 package com.yue.auth.bean;
 
-import com.yue.base.entity.IdEntity;
+import com.yue.common.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

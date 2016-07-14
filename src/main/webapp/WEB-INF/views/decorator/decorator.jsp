@@ -1,28 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lms
-  Date: 16-6-14
-  Time: 下午3:52
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <title>
-    <sitemesh:write property='title' />
-  </title>
-  <sitemesh:write property='head' />
-</head>
-<body>
-<header>header</header>
-<hr />
+<%@ include file="../common/include.inc.jsp" %>
+<form id="pagerForm" method="post" action="/user/page">
+  <%--<input type="hidden" name="status" value="${param.status}">--%>
+  <%--<input type="hidden" name="keywords" value="${basePageVO.keywords}" />--%>
+  <input type="hidden" name="pageNum" value="${basePageVO.pageNum}" />
+  <input type="hidden" name="pageSize" value="${basePageVO.pageSize}" />
+  <input type="hidden" name="orderField" value="${basePageVO.orderField}" />
+</form>
 
-hello.jsp的title将被填充到这儿：
-<sitemesh:write property='title' /><br />
-hello.jsp的body将被填充到这儿：
-<sitemesh:write property='body' />
-<hr />
-hello.jsp的自定义标签将被填充到这儿：
-<sitemesh:write property="myfooter"></sitemesh:write>
-</body>
-</html>
+
+<div class="pageHeader">
+  <!--pageHeader装饰-->
+  <sitemesh:write property='pageHeader' />
+</div>
+
+
+
+
+
+
+<div class="pageContent">
+  <!--pageContent装饰-->
+  <sitemesh:write property='pageContent' />
+
+
+
+  <div class="panelBar">
+    <div class="pages">
+      <span>显示</span>
+      <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+      </select>
+      <span>条，共${basePageVO.totalCount}条</span>
+    </div>
+    <div class="pagination" targetType="navTab" totalCount="${basePageVO.totalCount}" numPerPage="${basePageVO.pageSize}" pageNumShown="10" currentPage="${basePageVO.pageNum}"></div>
+  </div>
+</div>

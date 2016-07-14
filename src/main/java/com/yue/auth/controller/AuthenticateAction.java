@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by lms on 16-6-20.
- * 验证
+ * 登陆验证
  */
 
 @Controller
@@ -68,10 +68,12 @@ public class AuthenticateAction {
         if (!currentUser.isAuthenticated()){  //没有认证则登陆
             result = login(currentUser,user.getLoginName(),user.getPassword());
         }else{ //重复登陆
-            User shiroUser = (User) currentUser.getPrincipal();
-            if (!shiroUser.getLoginName().equals(user.getLoginName())){
+            String shiroUserLoginName =  (String)currentUser.getPrincipal();
+            if (!shiroUserLoginName.equals(user.getLoginName())){
                 currentUser.logout();
                 result=login(currentUser,user.getLoginName(),user.getPassword());
+            }else{
+                result=indexView;
             }
 
         }

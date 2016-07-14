@@ -1,4 +1,4 @@
-package com.yue.base.controller;
+package com.yue.demo.controller;
 
 /**
  * Created by lms on 16-7-12.

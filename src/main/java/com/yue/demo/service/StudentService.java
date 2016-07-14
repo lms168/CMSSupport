@@ -1,7 +1,7 @@
-package com.yue.base.service;
+package com.yue.demo.service;
 
-import com.yue.base.entity.Student;
-import com.yue.base.repository.StudentRepository;
+import com.yue.demo.entity.Student;
+import com.yue.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

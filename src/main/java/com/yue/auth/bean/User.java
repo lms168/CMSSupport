@@ -2,7 +2,7 @@ package com.yue.auth.bean;
 
 import javax.persistence.*;
 
-import com.yue.base.entity.IdEntity;
+import com.yue.common.IdEntity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.HashSet;

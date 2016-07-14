@@ -1,9 +1,10 @@
-package com.yue.base.controller;
+package com.yue.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.yue.auth.service.AuthService;
+import com.yue.common.BaseController;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;

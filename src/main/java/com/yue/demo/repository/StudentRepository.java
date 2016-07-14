@@ -1,6 +1,6 @@
-package com.yue.base.repository;
+package com.yue.demo.repository;
 
-import com.yue.base.entity.Student;
+import com.yue.demo.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

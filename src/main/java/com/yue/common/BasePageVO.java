@@ -1,25 +1,22 @@
-package com.yue.base.entity;
+package com.yue.common;
 
-import com.yue.utils.StringUtil;
 import com.yue.utils.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.Date;
-
 
 /**
  * 公共的查询参数
  */
-public class BaseConditionVO {
+public class BasePageVO {
 	public final static int PAGE_SHOW_COUNT = 20;
 	private int pageNum = 1;    //第几页
 	private int pageSize = 0;   //每页多少条
 	private int totalCount = 0;
 	private String orderField;
 	private String orderDirection;
-	public BaseConditionVO(int pageNum,int pageSize,int totalCount,String orderField,String orderDirection ){
+	public BasePageVO(int pageNum, int pageSize, int totalCount, String orderField, String orderDirection){
 		this.pageNum = pageNum;
 		this.pageSize = pageSize;
 		this.orderField = orderField;

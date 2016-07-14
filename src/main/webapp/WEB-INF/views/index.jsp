@@ -116,7 +116,7 @@
       <a class="logo" href="http://j-ui.com">标志</a>
       <ul class="nav">
         <li><a href="<%=request.getContextPath()%>/static/dwz_jui/changepwd.html" target="dialog" width="600">修改密码</a></li>
-        <li><a href="<%=request.getContextPath()%>/static/dwz_jui/login.html">退出</a></li>
+        <li><a href="<%=request.getContextPath()%>/loginOut">退出</a></li>
       </ul>
     </div>
 
