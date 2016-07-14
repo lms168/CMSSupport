@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dab1d894-8568-4950-88bb-2f23811bd0a3" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/addOrEditCus.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/auth/addOrEditUser.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ajaxDone.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/common/ajaxDone.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customerList.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/auth/pageUser.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/unauthorized.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error/unauthorized.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/yue/auth/controller/AuthenticateAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/yue/auth/controller/AuthenticateAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/yue/common/BaseAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/yue/common/BaseAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/yue/auth/controller/UserAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/yue/auth/controller/UserAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cmsSupport.iws" />
@@ -754,7 +743,7 @@
       <workItem from="1468313721295" duration="3580000" />
       <workItem from="1468317543588" duration="3617000" />
       <workItem from="1468381445749" duration="852000" />
-      <workItem from="1468475048926" duration="14069000" />
+      <workItem from="1468475048926" duration="14087000" />
     </task>
     <task id="LOCAL-00001" summary="修改项目结构">
       <created>1468478413736</created>
@@ -768,11 +757,17 @@
       <option name="project" value="LOCAL" />
       <updated>1468482748839</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="修改项目结构2">
+      <created>1468491394490</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1468491394490</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22118000" />
+    <option name="totallyTimeSpent" value="22136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="186" y="66" width="1774" height="1056" extended-state="0" />
