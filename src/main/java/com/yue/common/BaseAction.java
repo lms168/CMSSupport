@@ -40,7 +40,7 @@ public class BaseAction implements InitializingBean {
 
 
     protected ModelAndView ajaxDone(int statusCode, String message, String forwardUrl) {
-        ModelAndView mav = new ModelAndView("ajaxDone");
+        ModelAndView mav = new ModelAndView("common/ajaxDone");
         mav.addObject("statusCode", statusCode);
         mav.addObject("message", message);
         mav.addObject("forwardUrl", forwardUrl);

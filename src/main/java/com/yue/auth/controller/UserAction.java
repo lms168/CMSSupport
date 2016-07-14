@@ -1,5 +1,4 @@
 package com.yue.auth.controller;
-
 import com.yue.auth.bean.User;
 import com.yue.auth.service.AuthService;
 import com.yue.common.BaseAction;
@@ -25,25 +24,25 @@ public class UserAction extends BaseAction {
         BasePageVO basePageVO = this.getBaseConditionVo();
         Page<User> userPage = authService.findAllDynatic(user,basePageVO.getPageable());
         mv.addObject("pageResult",userPage);
-        mv.setViewName("customerList");
+        mv.setViewName("auth/pageUser");
         return mv;
     }
 
 
-    @RequestMapping("/findByCusId")
-    public ModelAndView findByCusId(User user){
+    @RequestMapping("/find")
+    public ModelAndView findUserById(User user){
         if (user.getId()!=null){
             user =   authService.findUserById(user.getId());
         }
         mv.addObject("user", user);
-        mv.setViewName("addOrEditCus");
+        mv.setViewName("auth/addOrEditUser");
         return mv;
     }
 
 
 
     @RequestMapping("/save")
-    public ModelAndView saveCustomer(User user){
+    public ModelAndView saveUser(User user){
         try {
             authService.saveUser(user);
         }catch (Exception e){
@@ -54,7 +53,7 @@ public class UserAction extends BaseAction {
 
 
     @RequestMapping("/delete")
-    public ModelAndView deleteCustomer(User user){
+    public ModelAndView deleteUser(User user){
         try{
             authService.deleteUser(user);
         }catch (Exception e){

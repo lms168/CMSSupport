@@ -1,5 +1,5 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %> <!--必须带上字符否则会出错-->
-<%@ include file="common/include.inc.jsp" %>
+<%@ include file="../common/include.inc.jsp" %>
 
 
 <div class="pageHeader">

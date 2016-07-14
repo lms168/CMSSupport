@@ -53,15 +53,13 @@ public class AuthenticateAction{
         String result = loginView;
         String code = (String) session.getAttribute("VALIDATE_CODE");
         String submitCode = WebUtils.getCleanParam(request,"validateCode");
-
-        if (StringUtils.isEmpty(submitCode)||!StringUtils.equals(code,submitCode)){
-            logger.error("验证码不正确，请重新输入验证码");
-            request.setAttribute("message","验证码不正确");
-            return result;
-        }
-
-
         try {
+
+            if (StringUtils.isEmpty(submitCode)||!StringUtils.equals(code,submitCode)){
+                logger.error("验证码不正确，请重新输入验证码");
+                request.setAttribute("message","验证码不正确");
+                return result;
+            }
             if (!currentUser.isAuthenticated()){  //没有认证则登陆
                     authService.checkLogin(currentUser, user.getLoginName(), user.getPassword());
             }else{ //重复登陆

@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="cmsSupport" />
+        <module name="freeMarkerDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cmsSupport" target="1.5" />
+      <module name="freeMarkerDemo" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
