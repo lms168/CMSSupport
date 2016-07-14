@@ -75,9 +75,9 @@ public class MyRealm extends AuthorizingRealm{
             throw  new UnknownAccountException("没有找到该账号");
         }
 
-//        if (Boolean.TRUE.equals(user.getLocked())){
-//            throw new LockedAccountException("账号处于锁定状态");
-//        }
+        if (Boolean.TRUE.equals(user.getLocked())){
+            throw new LockedAccountException("账号处于锁定状态");
+        }
 
 
 

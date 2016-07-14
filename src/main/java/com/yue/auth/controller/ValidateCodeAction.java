@@ -1,4 +1,4 @@
-package com.yue.demo.controller;
+package com.yue.auth.controller;
 
 /**
  * Created by lms on 16-7-12.
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 @Controller
 @Scope("prototype")
-public class ValidateCodeController{
+public class ValidateCodeAction {
     private static final long serialVersionUID = -7259885180065426829L;
 //    private static final Log logger = LogFactory.getLog(ValidateCodeAction.class);
 
@@ -42,7 +42,6 @@ public class ValidateCodeController{
      */
     @RequestMapping("/validateCode")
     public void execute(HttpServletRequest request,HttpServletResponse response) {
-        System.out.println("要生成验证码了？");
 //        if (logger.isInfoEnabled()) {
 //            logger.info("***** AgentLoginAction.createVCode() method begin*****");
 //        }

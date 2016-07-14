@@ -4,6 +4,8 @@ import com.yue.auth.bean.*;
 import com.yue.auth.repository.*;
 import com.yue.utils.StringUtil;
 import com.yue.utils.StringUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +36,8 @@ public class AuthService{
 	private UserRoleRepository userRoleRepository;
 
 	///////////////////////////////////保存用户信息///////////////////////////////////////////////////////
+
+
 
 	/**
 	 * 保存用户
@@ -158,5 +162,13 @@ public class AuthService{
 	}
 
 
+
+	public void checkLogin(Subject currentUser,String loginName,String password){
+		//此处会调用myrelam中的  doGetAuthenticationInfo身份验证方法
+		UsernamePasswordToken token = new UsernamePasswordToken(loginName, password);
+		token.setRememberMe(false);
+		currentUser.login(token);
+
+	}
 
 }

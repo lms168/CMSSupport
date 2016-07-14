@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yue.auth.service.AuthService;
-import com.yue.common.BaseController;
+import com.yue.common.BaseAction;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import com.yue.auth.bean.User;
 
 @Controller
 @Scope("prototype")
-public class LoginController extends BaseController {
+public class LoginController extends BaseAction {
 	private static Logger log = Logger.getLogger(LoginController.class);
 	@Autowired
 	private AuthService authService;

@@ -2,7 +2,7 @@ package com.yue.auth.controller;
 
 import com.yue.auth.bean.User;
 import com.yue.auth.service.AuthService;
-import com.yue.common.BaseController;
+import com.yue.common.BaseAction;
 import com.yue.common.BasePageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @Scope("prototype")
 @RequestMapping("user")
-public class UserAction extends BaseController{
+public class UserAction extends BaseAction {
     @Autowired
     private AuthService authService;
     @RequestMapping("/page")

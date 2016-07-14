@@ -1,5 +1,6 @@
 package com.yue.common;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -8,9 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by lms on 16-7-3.
  */
-public class BaseController {
+public class BaseAction implements InitializingBean {
+
+
+
     @Autowired
     protected HttpServletRequest request;
+
+
 
     public BasePageVO getBasePageVO() {
         return basePageVO;
@@ -52,4 +58,8 @@ public class BaseController {
     }
 
 
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("============================执行=======================");
+
+    }
 }
