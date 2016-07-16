@@ -42,10 +42,10 @@
   <div class="panelBar">
     <ul class="toolBar">
       <%--<shiro:hasRole name="admin">--%>
-        <li><a class="add" href="<%=request.getContextPath()%>/user/findByCusId" rel="addOrEditCus" target="dialog"><span>添加</span></a></li>
-        <li><a class="edit" href="<%=request.getContextPath()%>/user/findByCusId?id={userId}" rel="addOrEditCus"  target="dialog"><span>修改</span></a></li>
+        <li><a class="add" href="/user/find" rel="addOrEditCus" target="dialog"><span>添加</span></a></li>
+        <li><a class="edit" href="/user/find?id={id}" rel="addOrEditCus"  target="dialog"><span>修改</span></a></li>
       <%--</shiro:hasRole>--%>
-        <li><a class="delete" href="<%=request.getContextPath()%>/user/delete?id={userId}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+        <li><a class="delete" href="/user/delete?id={id}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 
       <li class="line">line</li>
       <li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
@@ -63,7 +63,7 @@
     <tbody>
     <c:if test="${result!=null}">
         <c:forEach items="${result}" var="item" varStatus="stauts">
-           <tr target="userId" rel="${item.id}">
+           <tr target="id" rel="${item.id}">
                 <td>${stauts.index+1}</td>
                 <td>${item.username}</td>
                 <td>${item.loginName}</td>

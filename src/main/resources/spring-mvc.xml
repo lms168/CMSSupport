@@ -42,6 +42,11 @@
 	<!--mvc对静态资源不拦截-->
 	<mvc:resources mapping="/static/**" location="WEB-INF/static/"/>
 
+
+
+
+
+
 	<!-- 上传配置 -->
 	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="102400000"></property>
@@ -54,8 +59,9 @@
 	<mvc:view-controller path="/"  view-name="/login"/>
 
 	<!--<mvc:view-controller path="/" view-name=admin/index"/>-->
-	<!--如果当前路径是/ 则交给相应的视图解析器直接解析为视图-->
-	<mvc:view-controller path="ajaxResult"  view-name="/ajaxResult"/>
+
+
+
 
 
 	<mvc:interceptors>

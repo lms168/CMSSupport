@@ -99,4 +99,40 @@
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+
+
+
+
+		<!--web类型的freemarker配置-->
+		<bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+			<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+			<property name="freemarkerSettings">
+				<props>
+					<prop key="template_update_delay">0</prop>
+					<prop key="default_encoding">GBK</prop>
+					<prop key="locale">zh_CN</prop>
+				</props>
+			</property>
+		</bean>
+
+	    <!--非web类型的freemarker配置,classPath路径-->
+		<bean id="freeMarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+			<property name="templateLoaderPath" value="/ftl" />
+		</bean>
+
+
+
+		<bean id="templateService" class="com.yue.generate.FreemarkerTemplate">
+			<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer" />
+			<property name="freeMarkerConfiguration" ref="freeMarkerConfiguration" />
+		</bean>
+
+
+
+
+
+
+
+
 </beans>
