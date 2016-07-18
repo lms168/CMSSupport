@@ -123,7 +123,7 @@
 
 
 
-		<bean id="templateService" class="com.yue.generate.FreemarkerTemplate">
+		<bean id="templateService" class="com.yue.generate.service.FreemarkerTemplate">
 			<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer" />
 			<property name="freeMarkerConfiguration" ref="freeMarkerConfiguration" />
 		</bean>

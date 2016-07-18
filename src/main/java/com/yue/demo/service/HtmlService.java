@@ -1,6 +1,6 @@
 package com.yue.demo.service;
 
-import com.yue.generate.FreemarkerTemplate;
+import com.yue.generate.service.FreemarkerTemplate;
 import com.yue.demo.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,8 +50,14 @@ public class HtmlService {
      * @param path
      * @param content
      */
-    public void writeResult(String path,String content) throws Exception {
-        File file = new File(path);
+    public void writeResult(String path,String fileName,String content) throws Exception {
+        File pageElementFileDir = new File(path);
+
+        if (!pageElementFileDir.exists()) { //如果目录不存在则创建多级目录
+            pageElementFileDir.mkdirs();
+        }
+
+        File file = new File(path+"/"+fileName);
         if (file.exists()){
             throw new Exception("文件已经存在了，不允许重复");
         }else{

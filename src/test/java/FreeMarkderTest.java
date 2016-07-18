@@ -25,12 +25,14 @@ public class FreeMarkderTest {
         try {
             String content = htmlService.all(msg);
             if (!StringUtils.isEmpty(content)){
-                String javaPath = new File("").getAbsolutePath() + "/src/main/java" + "/com/yue/demo/freeMarkerResult/aaa.html";
-                String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth/aaa.html";
+                String javaPath = new File("").getAbsolutePath() + "/src/main/java" + "/com/yue/demo/freeMarkerResult";
+                String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth";
+
+                String fileName = "aaa.html";
                 System.out.println("javaPath="+javaPath);
                 System.out.println("jspPath="+jspPath);
-                htmlService.writeResult(javaPath, content);
-                htmlService.writeResult(jspPath,content);
+                htmlService.writeResult(javaPath,fileName, content);
+                htmlService.writeResult(jspPath,fileName,content);
 
             }
         } catch (Exception e) {

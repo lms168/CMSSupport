@@ -1,4 +1,4 @@
-package com.yue.generate;
+package com.yue.generate.service;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;

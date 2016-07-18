@@ -155,8 +155,11 @@
             <li><a href="#" target="navTab">主框架面板</a>
               <ul>
                 <li><a href="<%=request.getContextPath()%>/static/dwz_jui/main.html" target="navTab" rel="main">我的主页</a></li>
+                <li><a href="<%=request.getContextPath()%>/generate/toAdd" target="navTab" rel="generateCode">代码生成</a></li>
                 <li><a href="<%=request.getContextPath()%>/user/page" target="navTab"  rel="customerList">用戶列表</a></li>
                 <li><a href="http://www.baidu.com" target="navTab" rel="page1">页面一(外部链接)</a></li>
+
+
               </ul>
             </li>
 
@@ -202,20 +205,7 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
 
 <div id="footer">Copyright &copy; 2016 lmsh</div>
 </body>

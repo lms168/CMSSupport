@@ -6,6 +6,7 @@ package com.yue.generate;
 
 import com.yue.demo.service.HtmlService;
 import com.yue.generate.entity.GenerateSerachBean;
+import com.yue.generate.service.FreemarkerTemplate;
 import com.yue.utils.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,9 +15,9 @@ import java.io.File;
 import java.util.*;
 
 /**
- * 代码生成
+ * 页面代码生成
  */
-public class GenrateCode {
+public class GenrateViewCode {
     public static void main(String[] args){
         String paths[] = {"classpath:applicationContext.xml"};
         //这个xml文件是Spring配置beans的文件，顺带一提，路径 在整个应用的根目录
@@ -133,7 +134,7 @@ public class GenrateCode {
                 classValues.add(btn.get("class"));
             }
             if (classValues.contains("delete")||classValues.contains("edit")){
-                map.put("showId",true);
+                map.put("showId", true);
             }
 
 
@@ -141,9 +142,9 @@ public class GenrateCode {
             String content = freemarkerTemplate.getContent(ftl, map);
 
             if (!StringUtils.isEmpty(content)){
-                String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth/newPage.jsp";
-                System.out.println("jspPath="+jspPath);
-                htmlService.writeResult(jspPath,content);
+                String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth";
+                String jspFileName = "newPage.jsp";
+                htmlService.writeResult(jspPath,jspFileName,content);
             }
 
 

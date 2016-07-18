@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="/user/page">
   <%--<input type="hidden" name="status" value="${param.status}">--%>
