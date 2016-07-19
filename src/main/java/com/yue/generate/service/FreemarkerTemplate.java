@@ -1,11 +1,11 @@
 package com.yue.generate.service;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import java.util.Map;
 
 /**
  * Created by lms on 16-7-15.
@@ -41,7 +41,7 @@ public class FreemarkerTemplate {
             Template t = freeMarkerConfigurer.getConfiguration().getTemplate(templateName);
             return FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
         } catch (Exception ex) {
-                logger.info("在WEB-INFO下面没有找到模板文件，将在classPath路径下面进行寻找");
+            logger.info("在WEB-INFO下面没有找到模板文件，将在classPath路径下面进行寻找");
             try {
                 Template t = freeMarkerConfiguration.getTemplate(templateName);
                 return FreeMarkerTemplateUtils.processTemplateIntoString(t, model);

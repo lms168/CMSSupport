@@ -4,9 +4,9 @@ package com.yue.generate;
  * Created by lms on 16-7-15.
  */
 
-import com.yue.demo.service.HtmlService;
-import com.yue.generate.entity.GenerateSerachBean;
+import com.yue.generate.entity.GenerateOpBean;
 import com.yue.generate.service.FreemarkerTemplate;
+import com.yue.utils.FileUtils;
 import com.yue.utils.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,26 +22,24 @@ public class GenrateViewCode {
         String paths[] = {"classpath:applicationContext.xml"};
         //这个xml文件是Spring配置beans的文件，顺带一提，路径 在整个应用的根目录
         ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
-        HtmlService htmlService = ctx.getBean("htmlService",HtmlService.class);
         FreemarkerTemplate freemarkerTemplate= ctx.getBean(FreemarkerTemplate.class);
-
         String ftl = "/view/page.ftl";
         try {
-            List<GenerateSerachBean> serachBeans = new ArrayList<GenerateSerachBean>();
+            List<GenerateOpBean> serachBeans = new ArrayList<GenerateOpBean>();
 
 
-            GenerateSerachBean generateSerachBean1 = new GenerateSerachBean();
-            generateSerachBean1.setTagType("text");
-            generateSerachBean1.setLabelName("客户名");
-            generateSerachBean1.setName("username");
-            generateSerachBean1.setValue("${user.username}");
+            GenerateOpBean generateOpBean1 = new GenerateOpBean();
+            generateOpBean1.setTagType("text");
+            generateOpBean1.setLabelName("客户名");
+            generateOpBean1.setName("username");
+            generateOpBean1.setValue("${user.username}");
 
 
-            GenerateSerachBean generateSerachBean2 = new GenerateSerachBean();
-            generateSerachBean2.setTagType("select");
-            generateSerachBean2.setLabelName("是否锁定");
-            generateSerachBean2.setName("locked");
-            generateSerachBean2.setValue("${user.locked}");
+            GenerateOpBean generateOpBean2 = new GenerateOpBean();
+            generateOpBean2.setTagType("select");
+            generateOpBean2.setLabelName("是否锁定");
+            generateOpBean2.setName("locked");
+            generateOpBean2.setValue("${user.locked}");
 
 
             Map<String,Object> objectMap = new HashMap<String, Object>();
@@ -49,10 +47,10 @@ public class GenrateViewCode {
             objectMap.put("false", "否");
 
 
-            generateSerachBean2.setSelectOptions(objectMap);
+            generateOpBean2.setSelectOptions(objectMap);
 
-            serachBeans.add(generateSerachBean1);
-            serachBeans.add(generateSerachBean2);
+            serachBeans.add(generateOpBean1);
+            serachBeans.add(generateOpBean2);
 
 
 
@@ -144,7 +142,7 @@ public class GenrateViewCode {
             if (!StringUtils.isEmpty(content)){
                 String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth";
                 String jspFileName = "newPage.jsp";
-                htmlService.writeResult(jspPath,jspFileName,content);
+                FileUtils.writeResult(jspPath, jspFileName, content);
             }
 
 

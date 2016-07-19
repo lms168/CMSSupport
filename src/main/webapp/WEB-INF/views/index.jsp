@@ -157,6 +157,8 @@
                 <li><a href="<%=request.getContextPath()%>/static/dwz_jui/main.html" target="navTab" rel="main">我的主页</a></li>
                 <li><a href="<%=request.getContextPath()%>/generate/toAdd" target="navTab" rel="generateCode">代码生成</a></li>
                 <li><a href="<%=request.getContextPath()%>/user/page" target="navTab"  rel="customerList">用戶列表</a></li>
+                <li><a href="<%=request.getContextPath()%>/test/page" target="navTab"  rel="testList">测试列表</a></li>
+
                 <li><a href="http://www.baidu.com" target="navTab" rel="page1">页面一(外部链接)</a></li>
 
 

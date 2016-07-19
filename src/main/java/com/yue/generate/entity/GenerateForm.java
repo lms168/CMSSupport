@@ -13,9 +13,6 @@ public class GenerateForm {
     private List<PropertiesBean> propertiesBeans;
 
 
-
-
-
     public String getEntityName() {
         return entityName;
     }

@@ -10,6 +10,7 @@ public class PropertiesBean {
     private String labelName;
     private Integer ifEditField;
     private Integer ifSearchField;
+    private String tagType;
     private String  searchMatch;
 
     public Integer getIndex() {
@@ -58,5 +59,13 @@ public class PropertiesBean {
 
     public void setSearchMatch(String searchMatch) {
         this.searchMatch = searchMatch;
+    }
+
+    public String getTagType() {
+        return tagType;
+    }
+
+    public void setTagType(String tagType) {
+        this.tagType = tagType;
     }
 }

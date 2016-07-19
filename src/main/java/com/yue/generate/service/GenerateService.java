@@ -1,14 +1,13 @@
 package com.yue.generate.service;
 
-import com.yue.demo.service.HtmlService;
-import com.yue.generate.entity.GenerateSerachBean;
+import com.yue.generate.entity.GenerateForm;
+import com.yue.generate.entity.GenerateOpBean;
+import com.yue.generate.entity.PropertiesBean;
+import com.yue.utils.FileUtils;
 import com.yue.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.*;
 
 /**
@@ -17,206 +16,220 @@ import java.util.*;
 @Service("generateService")
 public class GenerateService {
     @Autowired
-    private HtmlService htmlService;
-    @Autowired
     private FreemarkerTemplate freemarkerTemplate;
+    private String projectPath = "/home/lms/CmsSupport/";
+
+    /**
+     * 查询页面
+     * @param generateForm
+     * @param bean
+     * @param Bean
+     * @param pkg
+     */
+    public void generatePageView(GenerateForm generateForm, String bean, String Bean, String pkg){
+        try {
+            String pageViewFtl = "/view/page.ftl";
+
+            List<PropertiesBean> propertiesBeanList = generateForm.getPropertiesBeans();
+
+            /////////////////////////搜索条件集合
+            List<GenerateOpBean> serachBeans = new ArrayList<GenerateOpBean>();
+            GenerateOpBean generateOpBean = null;
+            for (PropertiesBean propertiesBean:propertiesBeanList){
+                if (propertiesBean.getIfSearchField()==1){
+                    generateOpBean = new GenerateOpBean();
+                    generateOpBean.setTagType(propertiesBean.getTagType());
+                    generateOpBean.setLabelName(propertiesBean.getLabelName());
+                    generateOpBean.setName(propertiesBean.getFieldName());
+                    generateOpBean.setValue("${"+bean+"."+propertiesBean.getFieldName()+"}");
+                    serachBeans.add(generateOpBean);
+                }
+            }
+
+
+
+
+
+        //// ////////////////////编辑菜单集合
+        List<Map<String,String>> listBtn = new ArrayList<Map<String,String>>();
+                if (generateForm.getOpType().contains("add")){
+                    Map<String,String> addBtn = new HashMap<String, String>();
+                    addBtn.put("class","add");
+                    addBtn.put("href","/"+bean+"/find");
+                    addBtn.put("rel","addOrEdit"+Bean);
+                    addBtn.put("target","dialog");
+                    addBtn.put("title", "添加");
+                    listBtn.add(addBtn);
+                }else if (generateForm.getOpType().contains("edit")){
+                    Map<String,String> editBtn = new HashMap<String, String>();
+                    editBtn.put("class","edit");
+                    editBtn.put("href","/"+bean+"/find?id={id}");
+                    editBtn.put("rel","addOrEdit"+Bean);
+                    editBtn.put("target","dialog");
+                    editBtn.put("title", "修改");
+                    listBtn.add(editBtn);
+                }else if (generateForm.getOpType().contains("delete")){
+                    Map<String,String> deleteBtn = new HashMap<String, String>();
+                    deleteBtn.put("class","delete");
+                    deleteBtn.put("href","/"+bean+"/delete?id={id}");
+                    deleteBtn.put("rel","delete"+Bean);
+                    deleteBtn.put("target","ajaxTodo");
+                    deleteBtn.put("title", "确定要删除吗?");
+                    listBtn.add(deleteBtn);
+                }
+
+
+
+
+
+
+
+        ////////////////////////////////////表头信息集合
+        List<Map<String,String>> tableColNames = new ArrayList<Map<String,String>>();
+        Map<String,String> th = null;
+        for(PropertiesBean propertiesBean:propertiesBeanList){
+            th = new HashMap<String, String>();
+            //th.put("with","80");
+            th.put("name", propertiesBean.getLabelName());
+            tableColNames.add(th);
+        }
+
+
+        ///////////////////////////////////////////////////////表格内容集合
+        List<String> tableColValues = new ArrayList<String>();
+        tableColValues.add("${stauts.index+1}");
+        for (PropertiesBean propertiesBean:propertiesBeanList){
+            tableColValues.add("${item."+propertiesBean.getFieldName()+"}");
+        }
+
+
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("actionUrl","/"+bean+"/page");
+        map.put("searchList",serachBeans);   //添加查询列表
+        map.put("opBtnList",listBtn); //操作按钮
+        map.put("tableColNames",tableColNames);//表头信息
+        map.put("tableColValues",tableColValues);//表中的内容
+
+
+
+        //////////////////////////////////////////////////////控制表格行是否显示id
+        if (generateForm.getOpType().contains("delete")||generateForm.getOpType().contains("edit")){
+            map.put("showId", true);
+        }
+
+
+
+        //开始执行生成逻辑
+        String content = freemarkerTemplate.getContent(pageViewFtl, map);
+        if (!StringUtils.isEmpty(content)){
+            String jspPath =projectPath + "/src/main/webapp/WEB-INF" + "/views/"+pkg;
+            String jspFileName = "page"+Bean+".jsp";
+            System.out.println("jspPath="+jspPath);
+            FileUtils.writeResult(jspPath, jspFileName, content);
+
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("生成==========");
+    }
+
+
+    /**
+     * 添加修改页面
+     * @param generateForm
+     * @param bean
+     * @param Bean
+     * @param pkg
+     */
+    public void generateAddOrEditView(GenerateForm generateForm, String bean, String Bean, String pkg){
+        try {
+            String pageViewFtl = "/view/addOrEdit.ftl";
+            List<PropertiesBean> propertiesBeanList = generateForm.getPropertiesBeans();
+
+            /////////////////////////编辑条件集合
+            List<GenerateOpBean> serachBeans = new ArrayList<GenerateOpBean>();
+            GenerateOpBean generateOpBean = null;
+            for (PropertiesBean propertiesBean:propertiesBeanList){
+                if (propertiesBean.getIfEditField()==1){
+                    generateOpBean = new GenerateOpBean();
+                    generateOpBean.setTagType(propertiesBean.getTagType());
+                    generateOpBean.setLabelName(propertiesBean.getLabelName());
+                    generateOpBean.setName(propertiesBean.getFieldName());
+                    generateOpBean.setValue("${"+bean+"."+propertiesBean.getFieldName()+"}");
+                    serachBeans.add(generateOpBean);
+                }
+            }
+
+
+
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("actionUrl","/"+bean+"/save");
+            map.put("id",bean+".id");
+            map.put("searchList",serachBeans);   //添加查询列表
+
+
+
+            //开始执行生成逻辑
+            String content = freemarkerTemplate.getContent(pageViewFtl, map);
+            if (!StringUtils.isEmpty(content)){
+                String jspPath =projectPath + "/src/main/webapp/WEB-INF" + "/views/"+pkg;
+                String jspFileName = "addOrEdit"+Bean+".jsp";
+                System.out.println("jspPath="+jspPath);
+                FileUtils.writeResult(jspPath, jspFileName, content);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("生成==========");
+    }
+
 
     /**
      * 生成后端代码
      */
-    public void generateCode(String pkg, String Bean,String bean) {
+    public void generateCode(String pkg, String Bean,String bean,List<String> opTypes) {
         String repositoryFtl = "/Repository.ftl";
         String serviceFtl = "/Service.ftl";
         String actionFtl = "/Action.ftl";
-
-
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("pkg", pkg);       //包名
         map.put("Bean", Bean);     //类名
         map.put("bean", bean);     //实体名
+        map.put("opTypes",opTypes); //操作集合
 
-
-        String repositoryContent = freemarkerTemplate.getContent(repositoryFtl, map);
-        String serviceContent = freemarkerTemplate.getContent(serviceFtl, map);
-        String actionContent = freemarkerTemplate.getContent(actionFtl, map);
-
-
-        if (!StringUtils.isEmpty(repositoryContent)) {
-            try {
-                String javaRepositoryPath = new File("").getAbsolutePath() + "/src/main/java/com/yue/" + pkg + "/repository";
-                String repositoryFile = Bean + "Repository.java";
-                System.out.println("javaPath=" + javaRepositoryPath);
-                htmlService.writeResult(javaRepositoryPath, repositoryFile, repositoryContent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (!StringUtils.isEmpty(serviceContent)) {
-            try {
-                String javaServicePath = new File("").getAbsolutePath() + "/src/main/java/com/yue/" + pkg + "/service";
-                String serviceFile = Bean + "Service.java";
-                System.out.println("javaPath=" + javaServicePath);
-                htmlService.writeResult(javaServicePath, serviceFile, serviceContent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (!StringUtils.isEmpty(actionContent)) {
-            try {
-                String javaControllerPath = new File("").getAbsolutePath() + "/src/main/java/com/yue/" + pkg + "/controller";
-                String controllerFile = Bean + "Action.java";
-                System.out.println("javaPath=" + javaControllerPath);
-                htmlService.writeResult(javaControllerPath, controllerFile, actionContent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
+        this.generateBackGroundCode(repositoryFtl,"repository","Repository", map);
+        this.generateBackGroundCode(serviceFtl, "service","Service",map);
+        this.generateBackGroundCode(actionFtl, "controller","Action",map);
         System.out.println("生成==========");
 
     }
 
 
-
-
-
-
-
-    public void generateView(List<GenerateSerachBean> serachBeans ){
-        String ftl = "/view/page.ftl";
-        try {
-
-
-
-            GenerateSerachBean generateSerachBean1 = new GenerateSerachBean();
-            generateSerachBean1.setTagType("text");
-            generateSerachBean1.setLabelName("客户名");
-            generateSerachBean1.setName("username");
-            generateSerachBean1.setValue("${user.username}");
-
-
-            GenerateSerachBean generateSerachBean2 = new GenerateSerachBean();
-            generateSerachBean2.setTagType("select");
-            generateSerachBean2.setLabelName("是否锁定");
-            generateSerachBean2.setName("locked");
-            generateSerachBean2.setValue("${user.locked}");
-
-
-            Map<String,Object> objectMap = new HashMap<String, Object>();
-            objectMap.put("true", "是");
-            objectMap.put("false", "否");
-
-
-            generateSerachBean2.setSelectOptions(objectMap);
-
-            serachBeans.add(generateSerachBean1);
-            serachBeans.add(generateSerachBean2);
-
-
-
-
-
-
-
-
-
-            /////////////编辑菜单
-            List<Map<String,String>> listBtn = new ArrayList<Map<String,String>>();
-            Map<String,String> addBtn = new HashMap<String, String>();
-            addBtn.put("class","add");
-            addBtn.put("href","/user/find");
-            addBtn.put("rel","addOrEdit");
-            addBtn.put("target","dialog");
-            addBtn.put("title", "添加");
-
-
-            Map<String,String> editBtn = new HashMap<String, String>();
-            editBtn.put("class","edit");
-            editBtn.put("href","/user/find?id={id}");
-            editBtn.put("rel","addOrEdit");
-            editBtn.put("target","dialog");
-            editBtn.put("title", "修改");
-
-            listBtn.add(addBtn);
-            listBtn.add(editBtn);
-
-
-
-            List<Map<String,String>> tableColNames = new ArrayList<Map<String,String>>();//表头信息
-            Map<String,String> th_xh = new HashMap<String, String>();
-            th_xh.put("width", "80");
-            th_xh.put("name", "序号");
-
-            Map<String,String> th_yhm = new HashMap<String, String>();
-            th_yhm.put("width", "120");
-            th_yhm.put("name", "用户号");
-
-
-            Map<String,String> th_dlm = new HashMap<String, String>();
-            th_dlm.put("width", "100");
-            th_dlm.put("name", "登录名");
-
-
-            Map<String,String> th_zt = new HashMap<String, String>();
-            th_zt.put("width", "150");
-            th_zt.put("name", "状态");
-
-            tableColNames.add(th_xh);
-            tableColNames.add(th_yhm);
-            tableColNames.add(th_dlm);
-            tableColNames.add(th_zt);
-
-
-            List<String> tableColValues = new ArrayList<String>();//表头信息
-            tableColValues.add("${stauts.index+1}");
-            tableColValues.add("${item.username}");
-            tableColValues.add("${item.loginName}");
-            tableColValues.add("${item.locked}");
-
-
-
-
-
-
-            Map<String,Object> map = new HashMap<String, Object>();
-            map.put("actionUrl","/user/page");
-            map.put("searchList",serachBeans);   //添加查询列表
-            map.put("opBtnList",listBtn); //操作按钮
-            map.put("tableColNames",tableColNames);//表头信息
-            map.put("tableColValues",tableColValues);//表中的内容
-
-
-            //控制表格行是否显示id
-            Set<String> classValues = new HashSet<String>();
-            for(Map<String,String> btn:listBtn){
-                classValues.add(btn.get("class"));
+    /**
+     * 生成后端代码
+     * @param ftl
+     * @param pkgName          实体类所在的包的名称
+     * @param classSuffix       实体类所在的包生成类时候的后缀
+     * @param model
+     */
+    private void generateBackGroundCode(String ftl,String pkgName,String classSuffix,Map<String, Object> model){
+        String content = freemarkerTemplate.getContent(ftl, model);
+        if (!StringUtils.isEmpty(content)) {
+            try {
+                ///src/main/java/com/yue/controller
+                String javaPath = projectPath + "/src/main/java/com/yue/" + model.get("pkg") + "/"+pkgName;
+                //TestAction.java
+                String javaFile =  model.get("Bean") + classSuffix+".java";
+                System.out.println("javaPath=" + javaPath);
+                FileUtils.writeResult(javaPath, javaFile, content);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (classValues.contains("delete")||classValues.contains("edit")){
-                map.put("showId", true);
-            }
-
-
-
-            String content = freemarkerTemplate.getContent(ftl, map);
-
-            if (!StringUtils.isEmpty(content)){
-                String jspPath =new File("").getAbsolutePath() + "/src/main/webapp/WEB-INF" + "/views/auth";
-                String jspFileName = "newPage.jsp";
-                htmlService.writeResult(jspPath,jspFileName,content);
-            }
-
-
-            System.out.println("生成==========");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

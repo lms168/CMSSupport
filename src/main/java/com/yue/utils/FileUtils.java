@@ -5,14 +5,7 @@
  */
 package com.yue.utils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Enumeration;
 
 import org.apache.commons.lang3.StringUtils;
@@ -610,4 +603,30 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		}
 	}
 
+
+	/**
+	 * 将数据写入到固定目录下面
+	 * @param path
+	 * @param content
+	 */
+	public static void writeResult(String path,String fileName,String content) throws Exception {
+		File pageElementFileDir = new File(path);
+
+		if (!pageElementFileDir.exists()) { //如果目录不存在则创建多级目录
+			pageElementFileDir.mkdirs();
+		}
+
+		File file = new File(path+"/"+fileName);
+		if (file.exists()){
+			throw new Exception("文件已经存在了，不允许重复");
+		}else{
+			file.createNewFile();
+		}
+		FileOutputStream fos = new FileOutputStream(file);
+		PrintWriter printWriter = new PrintWriter(fos);
+		printWriter.write(content);
+		printWriter.close();
+		fos.flush();
+		fos.close();
+	}
 }

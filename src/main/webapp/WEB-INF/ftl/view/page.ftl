@@ -9,6 +9,7 @@
         <#list searchList as searchBean>
             <td>
                 <#--第${searchBean_index+1}个用户-->
+                    <label>${searchBean.labelName}</label>
                 <#if searchBean.tagType="text">
                     <#--<#assign value=searchBean.value/>-->
                     <#--<input type="text" name="${searchBean.name}" value=${"\"$\{"+value+"}\""}/>-->
@@ -50,8 +51,8 @@
     <thead>
     <tr>
       <#list tableColNames as col>
-          <th>${col["name"]}</th>
           <#--<th width="${col["width"]}">${col["name"]}</th>-->
+          <th>${col["name"]}</th>
       </#list>
     </tr>
     </thead>

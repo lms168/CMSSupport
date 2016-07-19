@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="pageContent">
-  <form method="post" action="/generate/doAdd" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+  <form method="post" action="/generate/doGenerate" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
     <div class="pageFormContent" layoutH="56">
 
       <dl>
@@ -36,29 +36,11 @@
           <th>显示名</th>
           <th>是否是修改字段</th>
           <th>是否是搜索条件</th>
+          <th>htmlTag</th>
           <th>搜索匹配</th>
         </tr>
         </thead>
         <tbody id="generateBody">
-        <%--<tr>--%>
-        <%--<td><input type="hidden" name="propertiesBeans[0].index" value="0">1</td>--%>
-        <%--<td><input type="text" name="propertiesBeans[0].fieldName" value="name" class="textInput"></td>--%>
-        <%--<td><input type="text" name="propertiesBeans[0].labelName" class="textInput"></td>--%>
-        <%--<td><select name="propertiesBeans[0].ifEditField">--%>
-          <%--<option value="0">否</option>--%>
-          <%--<option value="1">是</option>--%>
-        <%--</select>--%>
-        <%--</td>--%>
-        <%--<td>--%>
-          <%--<select name="propertiesBeans[0].ifSearchField">--%>
-            <%--<option value="0">否</option>--%>
-            <%--<option value="1">是</option>--%>
-          <%--</select>--%>
-        <%--</td>--%>
-        <%--<td>--%>
-          <%--<input type="text" name="propertiesBeans[0].searchMatch" class="textInput">--%>
-        <%--</td>--%>
-        <%--</tr>--%>
         </tbody>
       </table>
     </div>
@@ -89,6 +71,12 @@
               "              <option value=\"1\">是</option>" +
               "            </select>" +
               "          </td>" +
+              "          <td>" +
+              "            <select  name=\"propertiesBeans["+index+"].tagType\">" +
+              "              <option value=\"text\">text</option>" +
+              "              <option value=\"select\">select</option>" +
+              "            </select>" +
+              "          </td>" +
               "          <td><input type=\"text\" name=\"propertiesBeans["+index+"].searchMatch\"/></td></tr>"
       return colInfoTemplate;
     }
@@ -111,6 +99,11 @@
         dataType:"json",
 
         success: function(msg){
+           if(msg==null){
+               alertMsg.error('类不存在，请检查后重新提交！');
+               return
+           }
+
           $.each(msg, function (index, value) {
              var col = initColInfo(index,value)
 //            alert(col)

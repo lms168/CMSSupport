@@ -4,7 +4,6 @@ import com.yue.common.BaseAction;
 import com.yue.generate.entity.GenerateForm;
 import com.yue.generate.entity.PropertiesBean;
 import com.yue.generate.service.GenerateService;
-import com.yue.utils.StringUtil;
 import com.yue.utils.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,16 +46,17 @@ public class GenerateAction extends BaseAction{
         }
         Class cls = Class.forName(generateForm.getEntityName());
         Field[] fields = cls.getDeclaredFields();
-
         PropertiesBean propertiesBean = null;
         for (Field field:fields){
             propertiesBean = new PropertiesBean();
             propertiesBean.setFieldName(field.getName());
             String fileType = field.getType().getName();
+            System.out.println("fileType="+fileType);
             list.add(propertiesBean);
         }
         return  list;
     }
+
 
 
     @RequestMapping("/doGenerate")
@@ -69,13 +68,17 @@ public class GenerateAction extends BaseAction{
         if (generateForm.getOpType().size()==0){
             return ajaxDoneError("请选择要生成那些代码");
         }
-
-        String[] dirs = generateForm.getEntityName().split(".");
-        String pkg = dirs[2];
-        String Bean = dirs[4];
+        String[] dirs = generateForm.getEntityName().split("\\.");
+        String pkg = dirs[2];                   //所处的包地址
+        String Bean = dirs[4];                  //类名
         String bean = Bean.substring(0, 1).toLowerCase() + Bean.substring(1); //将类名的首字母小写变为对象名
-        generateService.generateCode(pkg,Bean,bean);
-        return ajaxDoneSuccess("生成代码成功");
+        generateService.generateCode(pkg, Bean, bean,generateForm.getOpType());//生成后端代码
+        generateService.generatePageView(generateForm, bean, Bean, pkg);    //生成查询页面
+        generateService.generateAddOrEditView(generateForm,bean,Bean,pkg); //生成编辑页面
+
+
+
+          return ajaxDoneSuccess("生成代码成功");
     }
 
 

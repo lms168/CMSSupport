@@ -32,42 +32,12 @@ public class HtmlService {
         System.out.println("result============"+result);
 
         return result;
-//        Template t = freeMarkerConfig .getTemplate(templateName);
-//
-//        Configuration configuration = freeMarkerConfig.getConfiguration();
-//        Template template = configuration.getTemplate(templateName);
-//        File file = new File("/com/yue/demo/freeMarkerResult/file.html");
-//
-//        Writer out = new OutputStreamWriter(new FileOutputStream(file),"UTF-8");
-//        template.process(rootMap,out);
-//        IOUtils.closeQuietly(out);
+
 
     }
 
 
-    /**
-     * 将数据写入到固定目录下面
-     * @param path
-     * @param content
-     */
-    public void writeResult(String path,String fileName,String content) throws Exception {
-        File pageElementFileDir = new File(path);
 
-        if (!pageElementFileDir.exists()) { //如果目录不存在则创建多级目录
-            pageElementFileDir.mkdirs();
-        }
-
-        File file = new File(path+"/"+fileName);
-        if (file.exists()){
-            throw new Exception("文件已经存在了，不允许重复");
-        }else{
-            file.createNewFile();
-        }
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(content.getBytes());
-        fos.flush();
-        fos.close();
-    }
 
 
 

@@ -110,7 +110,7 @@
 			<property name="freemarkerSettings">
 				<props>
 					<prop key="template_update_delay">0</prop>
-					<prop key="default_encoding">GBK</prop>
+					<prop key="default_encoding">UTF-8</prop>
 					<prop key="locale">zh_CN</prop>
 				</props>
 			</property>
