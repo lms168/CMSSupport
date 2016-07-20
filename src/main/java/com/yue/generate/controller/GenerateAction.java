@@ -32,7 +32,7 @@ public class GenerateAction extends BaseAction{
 
     @RequestMapping("/toAdd")
     public String toGeneratePage(){
-        return "generate/add";
+        return "generate/generate";
     }
 
 
@@ -64,7 +64,6 @@ public class GenerateAction extends BaseAction{
         if (StringUtils.isEmpty(generateForm.getEntityName())){
             return ajaxDoneError("表名不能为空");
         }
-
         if (generateForm.getOpType().size()==0){
             return ajaxDoneError("请选择要生成那些代码");
         }
@@ -72,14 +71,12 @@ public class GenerateAction extends BaseAction{
         String pkg = dirs[2];                   //所处的包地址
         String Bean = dirs[4];                  //类名
         String bean = Bean.substring(0, 1).toLowerCase() + Bean.substring(1); //将类名的首字母小写变为对象名
-        generateService.generateCode(pkg, Bean, bean,generateForm.getOpType());//生成后端代码
+        generateService.generateCode(pkg, Bean, bean, generateForm.getOpType());//生成后端代码
         generateService.generatePageView(generateForm, bean, Bean, pkg);    //生成查询页面
         generateService.generateAddOrEditView(generateForm,bean,Bean,pkg); //生成编辑页面
-
-
-
-          return ajaxDoneSuccess("生成代码成功");
+        return ajaxDoneSuccess("生成代码成功");
     }
+
 
 
 }
