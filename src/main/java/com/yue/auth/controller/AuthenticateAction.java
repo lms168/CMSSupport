@@ -29,13 +29,24 @@ public class AuthenticateAction{
     private Logger logger = Logger.getLogger(this.getClass());
     private final String loginView = "login";
     private final String indexView = "index";
+    private final String loginPath = "redirect:/login";
+    private final String indexPath = "redirect:/index";
     @Resource(name = "authService")
     private AuthService authService;
+
+
+    @RequestMapping(value = "/index")
+    public String index(){
+        return indexView;
+    }
+
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request){
         return loginView;
     }
+
+
 
 
     @RequestMapping(value="/loginOut")
@@ -50,7 +61,8 @@ public class AuthenticateAction{
     @RequestMapping(value="/loginAuthc")
     public String loginAuthc(User user,HttpSession session,HttpServletRequest request){
         Subject currentUser = SecurityUtils.getSubject();
-        String result = loginView;
+
+        String result = loginPath;
         String code = (String) session.getAttribute("VALIDATE_CODE");
         String submitCode = WebUtils.getCleanParam(request,"validateCode");
         try {
@@ -67,26 +79,25 @@ public class AuthenticateAction{
                 if (!shiroUserLoginName.equals(user.getLoginName())){
                     currentUser.logout();
                     authService.checkLogin(currentUser, user.getLoginName(), user.getPassword());
-                }else{
-                    result=indexView;
                 }
             }
+            result=indexPath;
         } catch (UnknownAccountException uae) {
             logger.error("用户名不存在");
             request.setAttribute("message","登陆名不存在");
-            result = loginView;
+            result = loginPath;
         } catch (IncorrectCredentialsException ice) {
             logger.error("密码不正确");
             request.setAttribute("message","密码不正确");
-            result = loginView;
+            result = loginPath;
         } catch (LockedAccountException lae) {
             logger.error("用户处于锁定状态");
             request.setAttribute("message","用户处于锁定状态");
-            result = loginView;
+            result = loginPath;
         } catch (AuthenticationException ae) {
             logger.error("账户不存在");
             request.setAttribute("message","账户不存在");
-            result = loginView;
+            result = loginPath;
         }
         System.out.println("=========================" + result);
         return result;

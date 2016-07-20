@@ -39,7 +39,7 @@
 <body>
 <div class="container">
   <div class="content">
-    <form id="loginForm" action="/loginAuthc" method="post" onsubmit="return verifys();">
+    <form id="loginForm" action="/loginAuthc" method="get" onsubmit="return verifys();">
       <div class="Llogo"><img src="static/images/lobg.png" alt="" width="242" height="264" /></div>
       <div class="Rlogin">
         <p>

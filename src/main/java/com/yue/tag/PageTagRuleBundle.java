@@ -17,6 +17,9 @@ public class PageTagRuleBundle implements TagRuleBundle{
                         SiteMeshContext siteMeshContext) {
         defaultState.addRule("pageHeader",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("pageHeader"),false));
         defaultState.addRule("pageContent",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("pageContent"),false));
+        defaultState.addRule("menus",new ExportTagToContentRule(siteMeshContext,contentProperty.getChild("menus"),false));
+
+
 
     }
 
