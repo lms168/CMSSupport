@@ -32,7 +32,7 @@ public class GenerateAction extends BaseAction{
 
     @RequestMapping("/toAdd")
     public String toGeneratePage(){
-        return "generate/generate";
+        return "generate/toGenarate";
     }
 
 
