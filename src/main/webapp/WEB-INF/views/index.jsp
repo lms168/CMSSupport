@@ -16,7 +16,6 @@
           <div class="accordionHeader">
             <h2><span>Folder</span>界面组件</h2>
           </div>
-
           <div class="accordionContent">
             <ul class="tree treeFolder">
 
@@ -26,6 +25,7 @@
                   <li><a href="/static/dwz_jui/main.html" target="navTab" rel="main">我的主页</a></li>
                   <li><a href="/generate/toAdd" target="navTab" rel="generateCode">代码生成</a></li>
                   <li><a href="/user/page" target="navTab"  rel="customerList">用戶列表</a></li>
+                  <li><a href="/permission/list" target="navTab"  rel="permissionList">权限列表</a></li>
                   <li><a href="/test/page" target="navTab"  rel="testList">测试列表</a></li>
                   <li><a href="http://www.baidu.com" target="navTab" rel="page1">页面一(外部链接)</a></li>
                 </ul>

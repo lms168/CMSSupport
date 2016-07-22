@@ -47,15 +47,12 @@ public class AuthenticateAction{
     }
 
 
-
-
     @RequestMapping(value="/loginOut")
     public String loginOut(){
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
         return loginView;
     }
-
 
 
     @RequestMapping(value="/loginAuthc")

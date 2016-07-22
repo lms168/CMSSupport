@@ -20,8 +20,8 @@
         <label>是否锁定：</label>
         <select class="combox" name="locked">
           <option value=""  ${user.locked==null?"selected":""}>=全部=</option>
-          <option value="true"  ${user.locked?"selected":""}>是</option>
-          <option value="false" ${user.locked==true?"":"selected"}>否</option>
+          <option value="true"  ${user.locked==true?"selected":""}>是</option>
+          <option value="false" ${user.locked==false?"selected":""}>否</option>
         </select>
       </p>
     </div>

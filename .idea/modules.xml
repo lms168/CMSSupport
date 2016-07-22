@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cmsSupport.iml" filepath="$PROJECT_DIR$/cmsSupport.iml" />
-      <module fileurl="file://$USER_HOME$/freeMarkerDemo/freeMarkerDemo.iml" filepath="$USER_HOME$/freeMarkerDemo/freeMarkerDemo.iml" />
     </modules>
   </component>
 </project>

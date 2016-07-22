@@ -112,6 +112,12 @@ public class AuthService{
 		return permissionRepository.save(permission);
 	}
 
+
+	public Permission findPermissionById(Long id){
+		return permissionRepository.findOne(id);
+	}
+
+
 	////////////////////////////////////////role//////////////////////////////////////////////////////
 
 	public Role saveRole(Role role){
@@ -132,6 +138,11 @@ public class AuthService{
 
 	public void deletePermissionFromRole(List<PermissionRole> permissionRoles){
 		permissionRoleRepository.deleteInBatch(permissionRoles);
+	}
+
+
+	public List<Permission> listPermission(){
+		return permissionRepository.findAll();
 	}
 
 

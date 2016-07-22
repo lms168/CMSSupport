@@ -29,9 +29,9 @@ public class User extends IdEntity {
 
 
 	/**
-	 * 账号是否锁定，默认true
+	 * 账号是否锁定
 	 */
-	private Boolean locked = true;
+	private Boolean locked;
 	
 	@NotBlank
 	public String getUsername() {
